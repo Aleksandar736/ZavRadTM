@@ -73,7 +73,7 @@ include("sesija_menadzera.php");
                             echo "<td align = 'center' width = '1'><a href = 'citanj_e_pisma_men.php?key=".$id_por."'><img src = 'images/unopened-mail.png' border = '0'></img></a></td>";
                         }
                         else{
-                            echo "<tr><td align = 'center' width = '1'><a href = 'citanj_e_pisma_men?key=".$id_por."'><img src = 'images/openmail.png' border = '0'></img></a></td>";
+                            echo "<tr><td align = 'center' width = '1'><a href = 'citanj_e_pisma_men.php?key=".$id_por."'><img src = 'images/openmail.png' border = '0'></img></a></td>";
                         }
                         echo "<td align = 'center'><b>".ucfirst($salje)."</b></td>";
                         if($nasl_por == ""){
