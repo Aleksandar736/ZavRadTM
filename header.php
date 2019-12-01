@@ -1,3 +1,4 @@
+//heder za javnost
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="navbar-collapse d-flex flex-row" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
