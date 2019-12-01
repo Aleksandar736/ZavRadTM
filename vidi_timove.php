@@ -88,7 +88,7 @@ include("sesija_menadzera.php");
                         <?php
                         include 'konekcija.php';
 
-                        $upit = "SELECT * FROM `timovi";
+                        $upit = "SELECT * FROM `timovi`";
                         $result = mysqli_query($kon_sa_serv, $upit);
 
                         while ($red = mysqli_fetch_assoc($result)) {
