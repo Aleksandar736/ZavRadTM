@@ -47,6 +47,11 @@ $msg = "";
         
             <div class="tekst-sadrzaja">
             <?php
+            //Ako je kliknuto na dugme Otkaži čije ime (name) inputa je cancel ide preusmerenje
+            if (isset($_POST['cancel'])) {
+                echo "<script>location.href = 'projekti_po_timovima.php'</script>";
+            }
+            //Ako je kliknuto na dugme Postavi čije ime (name) inputa je set
             if (!isset($_POST['set'])) {
                 $sel_imekori = $_REQUEST['key'];
                 include 'konekcija.php';
@@ -57,7 +62,7 @@ $msg = "";
                     $tim = $red['ime_tima'];
                     $sel_imekori2 = $red['korisnicko_ime'];
                 }
-
+                //Tabela
                 echo "<div class='tabelaProPo'>";
                 echo "<h3 class='dodavanjeNaslov'>Dodeli projekat timu:<h3>";
                 echo "</div>";
@@ -93,20 +98,16 @@ $msg = "";
                 echo "</fieldset>";
                 echo "</div>";
 
-
-                if (isset($_POST['cancel'])) {
-                    echo "<script>location.href = 'projekti_po_timovima.php'</script>";
-                }
             }
             else{
                 $sel_imekori2 = $_POST['sel_im'];
                 $tim = $_POST['im_tim'];
                 $tim_pro = $_POST['sel_pro'];
                 include 'konekcija.php';
-
+                //Dodeljivanje projekta selektovanom imenu korisnika u tabeli ucesce
                 $upit = "UPDATE `ucesce` SET `ime_projekta` = '".$tim_pro."' WHERE `korisnicko_ime` = '".$sel_imekori2."'";
                 $result = mysqli_query($kon_sa_serv, $upit);
-
+                //Ako je uspešno dodeljen onda se ispisuje poruka o tome (uspešan je ako je if($result=true))
                 if($result){
                     mysqli_close($kon_sa_serv);
                     $msg = "Projekat je dodeljen timu <span class='obavestenjeZamena'>".$tim."</span>.";
@@ -123,7 +124,7 @@ $msg = "";
 
             ?>                
                 
-                <div class="obavestenjeZamena">
+                <div class="obavestenjeIzmene">
                     <?php echo $msg; ?>
                 </div>
             </div>        
