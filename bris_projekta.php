@@ -31,3 +31,4 @@ mysqli_close($kon_sa_serv);
 echo "<script>location.href = 'vidi_projekte.php'</script>";
 ?>
 
+
