@@ -1,148 +1,95 @@
-    <!-- Footer -->
-<footer class="page-footer font-small unique-color-dark">
+<?php
+include("sesija_tim_lidera.php");
+?>
 
-  <div style="background-color: #6351ce;">
-    <div class="container">
-
-      <!-- Grid row-->
-      <div class="row py-4 d-flex align-items-center">
-
-        <!-- Grid column -->
-        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-          <h6 class="mb-0"></h6>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/stil.css">    
+    <title>Poruke (tim lider)</title>
+</head>
+<body>
+    <?php
+        include 'heder_tim_lidera.php';
+    ?> 
+    <div class="raspored-kolona">
+        <div class="navigacija-sa-leve-strane">
+            <table>
+                <tr>
+                    <td>
+                        <a href ="tim_lider.php"><button>Glavna stranica tim lidera</button></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href ="projekat_tim_lidera.php"><button>Projekti</button></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href = "e_posta_tl.php"><button>Pošta</button></a>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <!-- Grid column -->
+        
+        <div class="glavni-sadrzaj">
+            <div class="glavni-naslov">
+                <h1>Tim Menadžment</h1>
+            </div>
+        
+            <div class="tekst-sadrzaja">
+                <div class="dodavanjeNaslov">
+                    <h2>E-pošta:</h2>
+                </div>
 
-        <!-- Grid column -->
-        <div class="col-md-6 col-lg-7 text-center text-md-right">
+                <?php
+                include 'konekcija.php';
+                //Broji koliko ima primljenih poruka
+                $upit = "SELECT count(*) as 'ukupno' FROM `slanje_poruka` WHERE `prima` = '".$pri_kor."'";
+                $result = mysqli_query($kon_sa_serv, $upit);
+                while ($red = mysqli_fetch_assoc($result)) {
+                    $primljene = $red['ukupno'];
+                }
+                //Broji koliko ima poslatih poruka
+                $upit1 = "SELECT count(*) as 'ukupno'  FROM `slanje_poruka` WHERE `salje` = '".$pri_kor."'";
+                $result1 = mysqli_query($kon_sa_serv, $upit1);
+                while ($red = mysqli_fetch_assoc($result1)) {
+                    $poslate = $red['ukupno'];
+                }
+                ?>
 
-          <!-- Facebook -->
-          <a class="fb-ic">
-            <i class="fab fa-facebook-f white-text mr-4"> </i>
-          </a>
-          <!-- Twitter -->
-          <a class="tw-ic">
-            <i class="fab fa-twitter white-text mr-4"> </i>
-          </a>
-          <!-- Google +-->
-          <a class="gplus-ic">
-            <i class="fab fa-google-plus-g white-text mr-4"> </i>
-          </a>
-          <!--Linkedin -->
-          <a class="li-ic">
-            <i class="fab fa-linkedin-in white-text mr-4"> </i>
-          </a>
-          <!--Instagram-->
-          <a class="ins-ic">
-            <i class="fab fa-instagram white-text"> </i>
-          </a>
-
+                <div class="tekst-sadrzaja">
+                    <b>Primljene poruke: </b><?php echo $primljene; ?><br>
+                    <b>Poslate poruke: </b><?php echo $poslate; ?><br>
+                </div>
+            </div>                       
         </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row-->
-
-    </div>
-  </div>
-
-  <!-- Footer Links -->
-  <div class="container text-center text-md-left mt-5">
-
-    <!-- Grid row -->
-    <div class="row mt-3">
-
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
-        <!-- Content -->
-        <h6 class="text-uppercase font-weight-bold">Korisni linkovi</h6>
-        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-        <p>
-            <a href="https://sr.wikipedia.org/sr-ec/%D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D1%92%D0%B5%D1%9A%D0%B5"> Menadžment (Vikipedija) </a>
-        </p>
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-        <!-- Links -->
-        <h6 class="text-uppercase font-weight-bold"></h6>
-        <!--<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">-->
-        <p>
-
-        </p>
-        <p>
-          <a href=""></a>
-        </p>
-        <p>
-          <a href=""></a>
-        </p>
-        <p>
-          <a href=""></a>
-        </p>
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-        <!-- Links -->
-        <h6 class="text-uppercase font-weight-bold"></h6>
-        <!--<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">-->
-        <p>
-          <a href=""></a>
-        </p>
-        <p>
-          <a href=""></a>
-        </p>
-        <p>
-          <a href=""></a>
-        </p>
-        <p>
-          <a href=""></a>
-        </p>
-
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-        <!-- Links -->
-        <h6 class="text-uppercase font-weight-bold">Kontakt</h6>
-        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-        <p>
-          <i class="fas fa-home mr-3">Tim menadžment</i> </p>
-        <p>
-          <i class="fas fa-envelope mr-3">Kralja Vlastimira 78</i> </p>
-        <p>
-          <i class="fas fa-phone mr-3">Beograd</i></p>
-        <p>
-          <i class="fas fa-print mr-3"></i> </p>
-
-      </div>
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row -->
-
-  </div>
-  <!-- Footer Links -->
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2018 Copyright:
-    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
-  
-  
-
-
+                 
+        <div class="navigacija-sa-desne-strane">
+            <table>
+                <tr>
+                    <td>            
+                        <a href = "pis_e_pisma_tl.php"><button>Napiši <br/>e-pismo</button></a>
+                    </td>
+                </tr>            
+                <tr>
+                    <td>
+                        <a href = "primlj_e_pisma_tl.php"><button>Primljena <br/>e-pisma</button></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href = "poslata_e_pisma_tl.php"><button>Poslata <br/>e-pisma</button></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>      
+    <?php
+        include 'footer.php';
+    ?>   
+</body>
+</html>
 
