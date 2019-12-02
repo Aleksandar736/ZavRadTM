@@ -3,20 +3,20 @@ include("sesija_menadzera.php");
 
 $msg = "";
 $exist = false;
-
+//Sa stranice dodav_nov_tim.php kupi postovane vrednosti
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     include 'konekcija.php';
-
+    //Ako je kliknuto na Otkaži (name = cancel) onda ide preusmerenje na str. vidi_timove.php
     if (isset($_POST['cancel'])) {
         echo "<script>location.href = 'vidi_timove.php'</script>";
     }
-
+    //Sa stranice dodav_nov_tim.php kupi postovane vrednosti
     $tim = $_POST['ime_tima'];
-
+    //Ako nije uneto ime tima na stranici dodav_nov_tim.php idu obaveštenje i preusmerenje na dodav_tim_kor.php
     if($tim == ''){
         die("<script>alert('Unesite ime tima!')</script><script>location.href = 'dodav_nov_tim.php'</script>");
     }
-
+    //Provera da li postoji tim sa tim imenom
     $upit = "SELECT * FROM `timovi`";
     $result = mysqli_query($kon_sa_serv, $upit);
     while ($red = mysqli_fetch_assoc($result)) {
@@ -25,20 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             break;
         }
     }
-
+    //Ako postoji ide poruka o tome
     if ($exist){
         $msg = 'Tim već postoji!';
         mysqli_close($kon_sa_serv);
     }
-    else{
-        function test_input($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
+    else{//U suprotnom ide verifikacija forme i unos podataka u tabelu timovi
+        function test_input($unos) {
+            $unos = trim($unos);
+            $unos = stripslashes($unos);
+            $unos = htmlspecialchars($unos);
+            return $unos;
         }
         $tim = test_input($tim);
-
+        //Unos imena novog tima u tabelu timovi i obaveštenje o tome
         $upit = "INSERT INTO `timovi` (`ime_tima`) VALUES ('".$tim."')";
         $result = mysqli_query($kon_sa_serv, $upit);
         if($result){
@@ -97,12 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
         
             <div class="tekst-sadrzaja">                      
-                <div class="obavestenjeIzmene">
-                    <?php echo $msg; ?>
+                <div class="obavestenjeIzmene oAplikaciji">
+                    <?php echo $msg; ?><!-- Štampa odgovarajuću poruku -->
                 </div>
-                <div class="obavestenjeIzmene">
+                <div class="obavestenjeIzmene"><!-- Taster Ok, koji nakon klika na njega preusmerava -->
                     <form name='ok_form' method='post' action='vidi_timove.php'>
-                    <input type = 'submit' name = 'ok' value = 'OK'>
+                        <input type = 'submit' name = 'ok' class="dugmici" value = 'OK'>
                 </div>                                    
             </div>       
         </div>
