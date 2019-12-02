@@ -47,10 +47,12 @@ $msg = "";
                         $star_loz = $_POST['star_loz'];
                         $nov_loz1 = $_POST['nov_loz1'];
                         $nov_loz2 = $_POST['nov_loz2'];
+                        
                         $upit = "SELECT * FROM `korisnici` WHERE `korisnicko_ime` = '".$pri_kor."'";
                         $result = mysqli_query($kon_sa_serv, $upit);
                         while ($red = mysqli_fetch_assoc($result)) {
                             $loz_iz_b = $red['lozinka'];
+                            
                             if ($star_loz == $loz_iz_b){
                                 if($nov_loz1 == $nov_loz2){
                                     $upit = "UPDATE `korisnici` SET `lozinka` = '".$nov_loz1."' WHERE `korisnicko_ime` = '".$pri_kor."'";
