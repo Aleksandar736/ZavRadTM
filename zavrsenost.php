@@ -59,17 +59,18 @@ include("sesija_menadzera.php");
                     </tr>
                     <?php
                     include 'konekcija.php';
-
+                    //Tražimo kor. imena tim lidera i imena njihovih timova 
                     $upit = "SELECT * FROM `ucesce` WHERE `uloga` = 'tim_lider' ORDER BY `ime_tima` ASC";
                     $result = mysqli_query($kon_sa_serv, $upit);
                     while ($red = mysqli_fetch_assoc($result)) {
                         $im_tim = $red['ime_tima'];
                         $kor_ime = $red['korisnicko_ime'];
+                        //Te podatke onda ispisujemo
                         echo "<tr><td><b>".ucfirst($im_tim)."</b></td>";
                         echo "<td>".ucfirst($kor_ime)."</td>";
 
                         $ukup = 0;
-                        $brojac = 0;
+                        $brojac = 0; //Sad tražimo završenost zadatka
                         $upit1 = "SELECT * FROM `ucesce` WHERE `ime_tima` = '".$im_tim."'";
                         $result1 = mysqli_query($kon_sa_serv, $upit1);
                         while ($red = mysqli_fetch_assoc($result1)) {
@@ -83,7 +84,7 @@ include("sesija_menadzera.php");
                                 $ukup = 0;
                                 $brojac = 0;
                             }
-                        }//U sluč. većeg broja čla. izrač. aritmet. sredinu (/broj čla. - tim lider)
+                        }//U sluč. većeg broja čla. izrač. aritmet. sredinu (zbir završe. svih čl. / broj čla. - tim lider)
                         if($brojac > 1){
                             $ukup = $ukup / ($brojac - 1);
                         }
