@@ -70,20 +70,20 @@ include("sesija_menadzera.php");
                         $dat_sl = $red['datum_slanja'];
                         echo "<tr>";
                         if($preg == 0){
-                            echo "<td align = 'center' width = '1'><a href = 'citanj_e_pisma_men.php?key=".$id_por."'><img src = 'images/unopened-mail.png' border = '0'></img></a></td>";
+                            echo "<td width = '1'><a href = 'citanj_e_pisma_men.php?key=".$id_por."'><img src = 'images/unopened-mail.png' border = '0'></img></a></td>";
                         }
                         else{
-                            echo "<tr><td align = 'center' width = '1'><a href = 'citanj_e_pisma_men.php?key=".$id_por."'><img src = 'images/openmail.png' border = '0'></img></a></td>";
+                            echo "<tr><td width = '1'><a href = 'citanj_e_pisma_men.php?key=".$id_por."'><img src = 'images/openmail.png' border = '0'></img></a></td>";
                         }
-                        echo "<td align = 'center'><b>".ucfirst($salje)."</b></td>";
+                        echo "<td><b>".ucfirst($salje)."</b></td>";
                         if($nasl_por == ""){
-                            echo "<td align = 'center' width = '150'>bez naslova</td>";
+                            echo "<td width = '150'>bez naslova</td>";
                         }
                         else{
-                            echo "<td align = 'center' width = '150'>$nasl_por</td>";
+                            echo "<td width = '150'>$nasl_por</td>";
                         }
-                        echo "<td align = 'center'>$dat_sl</td>";
-                        echo "<td align = 'center' width ='75'><a href = 'odg_na_e_pismo_men.php?key=".$salje."'><img src = 'images/mail_reply.png' border = '0'></img></a>";
+                        echo "<td>$dat_sl</td>";
+                        echo "<td width ='75'><a href = 'odg_na_e_pismo_men.php?key=".$salje."'><img src = 'images/mail_reply.png' border = '0'></img></a>";
                         echo " "."<a href = 'bris_e_pisma_men.php?key=".$id_por."'><img src = 'images/mail_delete.png' border = '0'></img></a></td>";
                         echo "</tr>";
                     }
@@ -101,11 +101,6 @@ include("sesija_menadzera.php");
                         <a href = "pis_e_pisma_men.php"><button>Napiši <br/>e-pismo</button></a>
                     </td>
                 </tr>            
-                <tr>
-                    <td>
-                        <a href = "primlj_e_pisma_men.php"><button>Primljena <br/>e-pisma</button></a>
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         <a href = "poslata_e_pisma_men.php"><button>Poslata <br/>e-pisma</button></a>
