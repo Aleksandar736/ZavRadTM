@@ -47,7 +47,7 @@ include("sesija_menadzera.php");
                 <div class="tabelaProPo">
                     <h2 class="dodavanjeNaslov">Dodaj novi tim:</h2>
                 </div>
-                <div class="tabelaProPo">
+                <div class="tabelaProPo"><!-- Forma iz koje podaci idu na dodav_nov_tim.php -->
                     <fieldset class="fildset2">
                     <form name='add_form' method='post' action='dodav_nov_tim_dod.php'>
                         <table border = "0" >
