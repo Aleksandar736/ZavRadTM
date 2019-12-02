@@ -41,14 +41,14 @@ include("sesija_clana.php");
             <div class="oAplikaciji">
             <?php
             include 'konekcija.php';
-
+            //Iz tabele ucesce kupi vrednosti vezane za prijavljenog korisnika $pri_kor (koji je obični član)
             $upit = "SELECT * FROM `ucesce` WHERE `korisnicko_ime` = '".$pri_kor."'";
             $result = mysqli_query($kon_sa_serv, $upit);
             while ($red = mysqli_fetch_assoc($result)) {
                 $ime_ti = $red['ime_tima'];
                 $zavr_zad = $red['zavrsenost_zadatka_(%)'];
                 $dod_zad = $red['zadatak_clana'];
-
+                //Šta treba da ispisuje (zavisi od % završenosti zadatka)
                 if($zavr_zad == 0){
                     $zavr_zad = "u pripremi";
                 }
@@ -62,23 +62,23 @@ include("sesija_clana.php");
                     $zavr_zad = $zavr_zad."%";
                 }
             }
-
+            //Tražimo tim lidera tima prijavljenog korisnika
             $upit = "SELECT * FROM `ucesce` WHERE `ime_tima` = '".$ime_ti."' AND `uloga` = 'tim_lider'";
             $result = mysqli_query($kon_sa_serv, $upit);
             while ($red = mysqli_fetch_assoc($result)) {
                 $ime_vo = $red['korisnicko_ime'];
             }
-
+            //Tražimo projekat tim lidera tima prijavljenog korisnika
             $upit = "SELECT * FROM `ucesce` WHERE `korisnicko_ime` = '".$ime_vo."'";
             $result = mysqli_query($kon_sa_serv, $upit);
             while ($red = mysqli_fetch_assoc($result)) {
                 $im_pro = $red['ime_projekta'];
             }
-
+            //Ako nema projekta, nema ni zadatka
             if($im_pro == ""){
                 $im_pro = "još uvek niste dobili zadatak";
             }
-
+            //Tabela
             echo "<div class='dodavanjeNaslov opis'>";
             echo "<fieldset>";
             echo "<table border = '0' width = '350' bgcolor = 'white'>";
@@ -90,7 +90,7 @@ include("sesija_clana.php");
             while ($red = mysqli_fetch_assoc($result4)) {
                 $opis_pro = $red['opis_projekta'];
             }
-
+            //Ako nema opisa projekta
             if($opis_pro == ""){
                 $opis_pro = "bez opisa";
             }
@@ -107,9 +107,9 @@ include("sesija_clana.php");
             echo "</fieldset>";
             echo "</div>";
 
-
-            if (isset($_POST['pov_oba'])) {
-                $unos_oce = $_POST['oc_zav_zad'];
+            //Šalje ocenu završenosti zadatka, kad je dole kliknuto na Pošalji (name='po_obav')
+            if (isset($_POST['po_obav'])) {
+                $unos_oce = $_POST['oc_zav_zad'];//Ova varijabla kupi konkretnu ocenu (name='oc_zav_zad')
 
                 $upit = "UPDATE `ucesce` SET `zavrsenost_zadatka_(%)` = '".$unos_oce."' WHERE `korisnicko_ime` = '".$pri_kor."'";
                 mysqli_query($kon_sa_serv, $upit);
@@ -134,7 +134,7 @@ include("sesija_clana.php");
                 echo "<td><input type='radio' name='oc_zav_zad' value='60'> 60% </td>";
                 echo "<td><input type='radio' name='oc_zav_zad' value='80'> 80% </td>";
                 echo "<td><input type='radio' name='oc_zav_zad' value='100'> izvršen </td>";
-                echo "<td><input type='submit' name='pov_oba' class='dugmici' value='Pošalji'></td>";
+                echo "<td><input type='submit' name='po_obav' class='dugmici' value='Pošalji'></td>";
                 echo "</form></tr></table></div>";
             }
             ?>
