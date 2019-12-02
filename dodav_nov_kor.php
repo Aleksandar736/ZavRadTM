@@ -47,60 +47,60 @@ include("sesija_menadzera.php");
                 <div>
                     <h3 class="dodavanjeNaslov">Dodaj korisnika:</h3>
                 </div>
-                <div>
+                <div><!-- Forma iz koje podaci idu na dodav_nov_kor_dod.php -->
                     <fieldset class="fildset2">
                     <form name='add_form' method='post' action='dodav_nov_kor_dod.php'>
-                            <table border = "0" >
-                                <tr>
-                                    <td style="text-align: right"><b>Korisničko ime:</b></td>
-                                    <td colspan="3"><input name = 'subj_izm' type = 'text' size="25" value = ''></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right"><b>Lozinka:</b></td>
-                                    <td colspan="3"><input name = 'un_loz_nk' type = 'password' size="25" value = ''></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right"><b>Imejl:</b></td>
-                                    <td colspan="3"><input name = 'un_imejl_nk' type = 'email' size="25" value = ''></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right"><b>Tim:</b></td>
-                                    <td colspan="3">	
-                                        <select name = 'izab_tim' class="selektovanje">
+                        <table border = "0" >
+                            <tr>
+                                <td style="text-align: right"><b>Korisničko ime:</b></td>
+                                <td colspan="3"><input name = 'subj_izm' type = 'text' size="25" value = ''></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right"><b>Lozinka:</b></td>
+                                <td colspan="3"><input name = 'un_loz_nk' type = 'password' size="25" value = ''></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right"><b>Imejl:</b></td>
+                                <td colspan="3"><input name = 'un_imejl_nk' type = 'email' size="25" value = ''></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right"><b>Tim:</b></td>
+                                <td colspan="3">	
+                                    <select name = 'izab_tim' class="selektovanje">
 
-                                        <?php
-                                            include 'konekcija.php';
-
-                                            $upit = "SELECT * FROM `timovi` ORDER BY `ime_tima` ASC";
-                                            $result = mysqli_query($kon_sa_serv, $upit);
-                                            while ($red = mysqli_fetch_assoc($result)){
-                                                $list = $red['ime_tima'];
-                                                if($list != "menadzeri"){
-                                                    echo "<option>$list</option>";
-                                                }
+                                    <?php
+                                        include 'konekcija.php';
+                                        //Spisak timova
+                                        $upit = "SELECT * FROM `timovi` ORDER BY `ime_tima` ASC";
+                                        $result = mysqli_query($kon_sa_serv, $upit);
+                                        while ($red = mysqli_fetch_assoc($result)){
+                                            $list = $red['ime_tima'];
+                                            if($list != "menadzeri"){
+                                                echo "<option>$list</option>";
                                             }
-                                            mysqli_close($kon_sa_serv);
-                                        ?>
+                                        }
+                                        mysqli_close($kon_sa_serv);
+                                    ?>
 
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right"><b>Uloga:</b></td>
-                                    <td colspan="3">
-                                        <select name = 'izab_ulog' class="selektovanje">
-                                        <option>obicni_clan_tima
-                                        <option>tim_lider
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td><input name = 'reset' type = 'reset' class='dugmici' value = 'Resetuj'></td>
-                                    <td><input name = 'cancel' type = 'submit' class='dugmici' value = 'Otkaži'></td>
-                                    <td><input name = 'add' type = 'submit' class='dugmici' value = 'Dodaj'></td>
-                                </tr>
-                            </table>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr><!-- Spisak uloga -->
+                                <td style="text-align: right"><b>Uloga:</b></td>
+                                <td colspan="3">
+                                    <select name = 'izab_ulog' class="selektovanje">
+                                    <option>obicni_clan_tima
+                                    <option>tim_lider
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input name = 'reset' type = 'reset' class='dugmici' value = 'Resetuj'></td>
+                                <td><input name = 'cancel' type = 'submit' class='dugmici' value = 'Otkaži'></td>
+                                <td><input name = 'add' type = 'submit' class='dugmici' value = 'Dodaj'></td>
+                            </tr>
+                        </table>
                     </form>
                     </fieldset>
                 </div>
