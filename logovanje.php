@@ -4,10 +4,10 @@ session_destroy();
 $pri_kor = "";
 $pri_loz = "";
 $msg = "";
-
+//Podatke dobija sa stranice index.php iz forme sa metodom post, koja upucuje ovde (action='logovanje.php')
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     include 'konekcija.php';
-
+    //Ove dve varijable preuzimaju vrednosti iz forme sa stranice index.php
     $pri_kor = $_POST['kor_ime'];
     $pri_loz = $_POST['loz'];
     //Validacija forme
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
     $pri_kor = test_input($pri_kor);
     $pri_loz = test_input($pri_loz);
-
+    //Uzimamo podatke (korisničko ime, lozinka i uloga) iz baze 
     $upit = "SELECT korisnici.korisnicko_ime, korisnici.lozinka, ucesce.uloga"
     ." FROM korisnici INNER JOIN ucesce ON korisnici.korisnicko_ime = ucesce.korisnicko_ime";
     $result = mysqli_query($kon_sa_serv, $upit);
@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         $kor_iz_baz = $red['korisnicko_ime'];
         $loz_iz_baz = $red['lozinka'];
         $poz = $red['uloga'];
+        //Proveravamo da li se poklapaju uneti podaci za koris. ime i lozinku sa onim iz baze
         if(($pri_kor === $kor_iz_baz) AND ($pri_loz === $loz_iz_baz)){
             if($poz === "menadzer"){
                 session_start();
@@ -93,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                             <input type = 'password' name = 'loz' value = ''>
                         </div>
                         <div>
-                            <input type = 'submit' name = 'login' value = 'Uloguj se'>
+                            <input type = 'submit' name = 'login' class="dugmici" value = 'Uloguj se'>
                         </div>
                     </form>
                 </div>
