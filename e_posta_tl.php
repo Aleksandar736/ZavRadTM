@@ -46,13 +46,13 @@ include("sesija_tim_lidera.php");
 
                 <?php
                 include 'konekcija.php';
-
+                //Broji koliko ima primljenih poruka
                 $upit = "SELECT count(*) as 'ukupno' FROM `slanje_poruka` WHERE `prima` = '".$pri_kor."'";
                 $result = mysqli_query($kon_sa_serv, $upit);
                 while ($red = mysqli_fetch_assoc($result)) {
                     $primljene = $red['ukupno'];
                 }
-
+                //Broji koliko ima poslatih poruka
                 $upit1 = "SELECT count(*) as 'ukupno'  FROM `slanje_poruka` WHERE `salje` = '".$pri_kor."'";
                 $result1 = mysqli_query($kon_sa_serv, $upit1);
                 while ($red = mysqli_fetch_assoc($result1)) {
