@@ -51,7 +51,7 @@ include("sesija_tim_lidera.php");
                     $mess = "";
 
                     include 'konekcija.php';
-
+                    //Broji koliko je ne pregledanih poruka
                     $brojac = 0;
                     $upit = "SELECT * FROM `slanje_poruka` WHERE `prima` = '".$pri_kor."' AND `pregledana` = 0";
                     $result = mysqli_query($kon_sa_serv, $upit);
