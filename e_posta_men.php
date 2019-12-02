@@ -31,11 +31,6 @@ include("sesija_menadzera.php");
                         <a href ="projekti_po_timovima.php"><button>Projekti po timovima</button></a>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <a href ="e_posta_men.php"><button>Pošta</button></a>
-                    </td>
-                </tr>
             </table>
         </div>
         <div class="glavni-sadrzaj">
@@ -50,13 +45,13 @@ include("sesija_menadzera.php");
 
                 <?php
                 include 'konekcija.php';
-
+                //Broji koliko ima primljenih poruka
                 $upit = "SELECT count(*) as 'ukupno' FROM `slanje_poruka` WHERE `prima` = '".$pri_kor."'";
                 $result = mysqli_query($kon_sa_serv, $upit);
                 while ($red = mysqli_fetch_assoc($result)) {
                     $primljene = $red['ukupno'];
                 }
-
+                //Broji koliko ima poslatih poruka
                 $upit1 = "SELECT count(*) as 'ukupno'  FROM `slanje_poruka` WHERE `salje` = '".$pri_kor."'";
                 $result1 = mysqli_query($kon_sa_serv, $upit1);
                 while ($red = mysqli_fetch_assoc($result1)) {
