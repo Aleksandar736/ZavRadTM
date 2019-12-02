@@ -45,11 +45,6 @@ include("sesija_menadzera.php");
                 </tr>
                 <tr>
                     <td>
-                        <a href ="projekti_po_timovima.php"><button>Projekti po timovima</button></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <a href ="e_posta_men.php"><button>Pošta</button></a>
                     </td>
                 </tr>
@@ -89,7 +84,7 @@ include("sesija_menadzera.php");
                         </tr>
                         <?php
                         include 'konekcija.php';
-
+                        //U tabeli ucesce trazi tim lidere timova i imena projekata na kojima rade
                         $upit = "SELECT * FROM `ucesce` WHERE `uloga` = 'tim_lider' ORDER BY `ime_tima` ASC";
                         $result = mysqli_query($kon_sa_serv, $upit);
                         while ($red = mysqli_fetch_assoc($result)) {
@@ -109,13 +104,13 @@ include("sesija_menadzera.php");
                                 }                            
                             }
                             echo "</td>";
-                            
+                            //Ako je tim bez projekta onda postoji link sa kljucem za dodelu projekta (kljuc (?key=".$imekori.") je ime tim lidera)                           
                             if($imeproj == ""){
                                 echo "<td align = 'center'><b><font color = 'red'>bez dodeljenog projekta</font><b></td>";
                                 echo "<td align = 'center' width = '70px'><img src = 'images/005-pen_1.png' border = '0' alt = 'dodelj_proj_timu'></img>";
                                 echo "<a href = 'dodelj_proj_timu.php?key=".$imekori."'><img src = 'images/task_list.png' border = '0' alt = 'dodelj_proj_timu'></img></a></td>";
                                 echo "<td align = 'center' width = '40px'><img src = 'images/Mail.png' border = '0' alt = 'notify'></img></td>";
-                            }
+                            }//Ako ima projekat štampa ga
                             else{
                                 echo "<td align = 'center'>".ucfirst($imeproj)."</td>";
                                 echo "<td align = 'center' width = '70px'><a href = 'prom_dodelj_proj_timu.php?key=".$imekori."'><img src = 'images/005-pen_1.png' border = '0' alt = 'add group task'></img></a>";
