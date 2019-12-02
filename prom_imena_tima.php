@@ -46,6 +46,7 @@ include("sesija_menadzera.php");
         
             <div class="tekst-sadrzaja">              
                 <?php
+                //Validacija forme
                 function test_input($unos) {
                     $unos = trim($unos);
                     $unos = stripslashes($unos);
@@ -54,22 +55,21 @@ include("sesija_menadzera.php");
                 }
 
                 $msg = "";
-                
+                //Ako je kliknuto na Otkaži
                 if (isset($_POST['cancel'])) {
                     print("<script>location.href = 'vidi_timove.php'</script>");
                 }
-
+                //Ako je kliknuto na promeni 
                 if (isset($_POST['change'])) {
                     include 'konekcija.php';
-
+                    //Preuzima vrednosti iz forme na dnu stranice
                     $im_tima = $_POST['n_ime_tima'];
                     $skrv_v = $_POST['skr_vred'];
                     
                     //verifikacija forme
                     $im_tima = test_input($im_tima);
                     $skrv_v = test_input($skrv_v);	
-                    
-                    //Nešto nije u redu sa ovim upitom
+                    //Menja ime tima u tabeli timovi
                     $upit = "UPDATE `timovi` SET `ime_tima` = '".$im_tima."' WHERE `ime_tima` = '".$skrv_v."'";
                     $result = mysqli_query($kon_sa_serv, $upit);
                     if($result){
@@ -99,7 +99,7 @@ include("sesija_menadzera.php");
                     echo "<table border = '0' >";
                     echo "<tr><td><b>Tim:</b></td>";
                     echo "<td colspan='3'><input name = 'n_ime_tima' type = 'text' size='25' value = $kljuc_ime></td>";
-                    echo "<td><input name = 'skr_vred' type = 'hidden' value = $kljuc_ime></td>";
+                    echo "<td><input name = 'skr_vred' type = 'hidden' value = $kljuc_ime></td></tr>";
                     echo "<tr>";
                     echo "<td></td><td><input name = 'reset' type = 'reset' class='dugmici' value = 'Resetuj'></td>";
                     echo "<td><input name = 'cancel' type = 'submit' class='dugmici' value = 'Otkaži'></td>";
