@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 session_destroy();
 ?>
 <!DOCTYPE html>
@@ -26,7 +25,7 @@ session_destroy();
             </div>
         
             <div class="tekst-sadrzaja">                      
-                <div class="tabelaProPo">
+                <div class="tabelaProPo"><!-- Šalje na stranicu logovanje.php -->
                     <form name='login_form' method='post' action='logovanje.php'>
                         <div class="tabelaProPo">
                             <label>Korisničko ime: </label>
@@ -41,8 +40,7 @@ session_destroy();
                         </div>
                     </form>
                 </div>                                  
-            </div>
-        
+            </div>        
         </div>
         
         <div class="navigacija-sa-desne-strane">
