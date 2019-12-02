@@ -45,7 +45,7 @@ include("sesija_menadzera.php");
             </div>
         
             <div class="dodavanjeNaslov">
-                <h3>Poslate poruke:</h3>
+                <h3>Poslata e-pisma:</h3>
 
                 <div class="tekst-sadrzaja">
                     <table border = "2" width = "90%">
@@ -58,6 +58,7 @@ include("sesija_menadzera.php");
                     </tr>
                     <?php
                     include 'konekcija.php';
+                    //Tražimo poruke koje je poslao prijavljeni korisnik
                     $upit = "SELECT * FROM `slanje_poruka` WHERE `salje` = '".$pri_kor."' ORDER BY `datum_slanja` DESC";
                     $result = mysqli_query($kon_sa_serv, $upit);
                     while ($red = mysqli_fetch_assoc($result)) {
@@ -66,23 +67,23 @@ include("sesija_menadzera.php");
                         $prim = $red['prima'];
                         $nasl_por = $red['naslov_poruke'];
                         $dat_sl = $red['datum_slanja'];
-
+                        //Ako poruka nije pregledana slika neotvorenog pisma
                         echo "<tr>";
                         if($preg == 0){
-                            echo "<td align = 'center' width = '1'><a href = 'citanj_po_e_pisma_men.php?key=".$id_por."'><img src = 'images/unopened-mail.png' border = '0'></img></a></td>";
+                            echo "<td width = '1'><a href = 'citanj_po_e_pisma_men.php?key=".$id_por."'><img src = 'images/unopened-mail.png' border = '0'></img></a></td>";
                         }
-                        else{
-                            echo "<tr><td align = 'center' width = '1'><a href = 'citanj_po_e_pisma_men.php?key=".$id_por."'><img src = 'images/openmail.png' border = '0'></img></a></td>";
-                        }
-                        echo "<td align = 'center'><b>".ucfirst($prim)."</b></td>";
+                        else{//Ako je poruka pregledana slika otvorenog pisma
+                            echo "<tr><td width = '1'><a href = 'citanj_po_e_pisma_men.php?key=".$id_por."'><img src = 'images/openmail.png' border = '0'></img></a></td>";
+                        }//Prima
+                        echo "<td><b>".ucfirst($prim)."</b></td>";
                         if($nasl_por == ""){
-                            echo "<td align = 'center' width = '150'>bez naslova</td>";
+                            echo "<td width = '150'>bez naslova</td>";
                         }
-                        else{
-                            echo "<td align = 'center' width = '150'>".ucfirst($nasl_por)."</td>";
-                        }
-                        echo "<td align = 'center'>$dat_sl</td>";
-                        echo "<td align = 'center' width ='60'>";
+                        else{//Naslov
+                            echo "<td width = '150'>".ucfirst($nasl_por)."</td>";
+                        }//Datum
+                        echo "<td>$dat_sl</td>";
+                        echo "<td width ='60'>";
                         echo "<a href = 'bris_e_pisma_po_men.php?key=".$id_por."'><img src = 'images/mail_delete.png' border = '0'></img></a></td>";
                         echo "</tr>";
                     }
@@ -103,12 +104,7 @@ include("sesija_menadzera.php");
                     <td>
                         <a href = "primlj_e_pisma_men.php"><button>Primljena <br/>e-pisma</button></a>
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href = "poslata_e_pisma_men.php"><button>Poslata <br/>e-pisma</button></a>
-                    </td>
-                </tr>                
+                </tr>              
             </table>
         </div>
     </div>
