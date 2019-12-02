@@ -80,6 +80,7 @@ include("sesija_tim_lidera.php");
                         while ($red = mysqli_fetch_assoc($result)) {
                             $kor_im = $red['korisnicko_ime'];
                             $im_ti = $red['ime_tima'];
+                            
                             echo "<tr>";
                             echo "<td>".ucfirst($kor_im)."</td>";
                             echo "<td>".ucfirst($im_ti)."</td>";
