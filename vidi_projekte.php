@@ -87,17 +87,18 @@ include("sesija_menadzera.php");
                         </tr>
                         <?php
                         include 'konekcija.php';
-
+                        //Iz tabele projekti uzimamo vrednosti iz kolona ime projekta i opis projekta
                         $upit = "SELECT * FROM `projekti` ORDER BY `ime_projekta` ASC";
                         $result = mysqli_query($kon_sa_serv, $upit);
                         while ($red = mysqli_fetch_assoc($result)) {
                             $im_pro = $red['ime_projekta'];
                             $op_pro = $red['opis_projekta'];
+                            //Ime projekta
                             echo "<tr><td><b>".ucfirst($im_pro)."</b></td>";
-                            if($op_pro ==""){
+                            if($op_pro ==""){//Opis projekta kad ga nema piše bez opisa
                                 echo "<td><b><font color = 'red'>bez opisa</font></b></td>";
                             }
-                            else{
+                            else{//Kada ga ima piše opis projekta
                                 echo "<td>$op_pro</td>";
                             }
                             echo "<td width = '70px'><a href = 'bris_projekta.php?key=".$im_pro."'><img src = 'images/garbage.png' border = '0' alt = 'izbriši projekat'></img></a>";
@@ -132,12 +133,7 @@ include("sesija_menadzera.php");
                     <td>
                         <a href = "vidi_timove.php"><button>Vidi timove</button></a>
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href = "vidi_projekte.php"><button>Vidi projekte</button></a>
-                    </td>
-                </tr>                
+                </tr>              
             </table>
         </div>
     </div>                
