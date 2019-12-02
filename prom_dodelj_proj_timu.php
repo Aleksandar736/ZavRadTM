@@ -48,17 +48,18 @@ $msg = "";
             
             <div class="tekst-sadrzaja">        
                 <div class="oAplikaciji">               
-                <?php
+                <?php 
+                //Ako je kliknuto na otkaži ide preusmerenje
                 if (isset($_POST['cancel'])) {
                     echo "<script>location.href = 'projekti_po_timovima.php'</script>";
                 }
-
+                //Ako je kliknuto na Promeni 
                 else if (isset($_POST['change'])) {
                     include 'konekcija.php';
-
+                    //Kupi vrednosti iz forme na dnu stranice
                     $proje_ti = $_POST['pro_gru'];
                     $ime_li = $_POST['ime_vo'];
-
+                    //Menja ime projekta u tabeli ucesce u redu tim lidera
                     $upit = "UPDATE `ucesce` SET `ime_projekta` = '".$proje_ti."' WHERE `korisnicko_ime` = '".$ime_li."'";
                     $result = mysqli_query($kon_sa_serv, $upit);
                     if($result){
@@ -74,17 +75,17 @@ $msg = "";
                     echo "<input name = 'ok' type = 'submit' class='dugmici' value = 'OK'>";
                     echo "</div>";
                 }
-                else{
+                else{//Kupi vrednost iz internet adrese php?key=
                     $ime_li = $_REQUEST['key'];
                     include 'konekcija.php';
-
+                    //Tražimo ime tima i projekta odovarajućeg tim lidera
                     $upit = "SELECT * FROM `ucesce` WHERE `korisnicko_ime` = '".$ime_li."'";
                     $result = mysqli_query($kon_sa_serv, $upit);
                     while ($red = mysqli_fetch_assoc($result)) {
                     $tim_im = $red['ime_tima'];
                     $proje_ti = $red['ime_projekta'];
                     }
-
+                    //Tabela
                     echo "<div class='tabelaProPo'>";
                     echo "<h3 class='dodavanjeNaslov'>Zameni projekat:</h3>";
                     echo "</div>";
@@ -101,7 +102,7 @@ $msg = "";
                     echo "<tr><td style='text-align: right'><b>Projekat:</b></td>";
                     echo "<td colspan='3'><select class='selektovanje' name = 'pro_gru'>";
                     echo "<option></option>";
-
+                    //Lista projekata
                     $upit = "SELECT * FROM `projekti` ORDER BY `ime_projekta` ASC";
                     $result = mysqli_query($kon_sa_serv, $upit);
                     while ($red = mysqli_fetch_assoc($result)){
