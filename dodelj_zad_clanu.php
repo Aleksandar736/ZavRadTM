@@ -49,17 +49,18 @@ include("sesija_tim_lidera.php");
                     $un_zad = $_POST['un_zad'];
                     $un_ime = $_POST['un_ime'];
                     include 'konekcija.php';
-
+                    //Unos zadatka clana u tabelu ucesce
                     $upit = "UPDATE `ucesce` SET `zadatak_clana` = '".$un_zad."' WHERE `korisnicko_ime` = '".$un_ime."'";
                     mysqli_query($kon_sa_serv, $upit);
-
+                    //Unos zavrsenosti zadatka clana u tabelu ucesce
                     $upit = "UPDATE `ucesce` SET `zavrsenost_zadatka_(%)` = 'na cekanju' WHERE `korisnicko_ime` = '".$un_ime."'";
                     mysqli_query($kon_sa_serv, $upit);
-
+                    //Zatvara konekciju sa bazom
                     mysqli_close($kon_sa_serv);
-                    print("<script>location.href = 'projekat_tim_lidera.php'</script>");
+                    //Nakon dodele ide preusmerenje na stranicu projekat_tim_lidera.php
+                    echo "<script>location.href = 'projekat_tim_lidera.php'</script>";
                 }
-                else{
+                else{//Ovde preuzima vrednost iz adrese
                     $un_ime = $_REQUEST['key'];
                     $pri_kor = $_SESSION['korisnicko_ime'];
                     $opis ="";
