@@ -54,11 +54,11 @@ include("sesija_menadzera.php");
 
             $msg = "";
             $provera = false;
-
+            //Ako je kliknuto na Otkaži
             if (isset($_POST['cancel'])) {
                 echo "<script>location.href = 'upravljacka_stranica.php'</script>";
             }
-
+            //Ako je kliknuto na Promeni
             if (isset($_POST['change'])) {
                 include 'konekcija.php';
 
@@ -116,7 +116,7 @@ include("sesija_menadzera.php");
                 $msg = "Izmene su sačuvane.";
                 echo "<div class='tekst-sadrzaja'>";
                 echo "<form name='ok_form' method='post' action='upravljacka_stranica.php'>";
-                echo "<input name = 'ok' type = 'submit' class='dugmici' value = 'OK'>";
+                echo "<input name = 'ok' type = 'submit' class='dugmici oAplikaciji' value = 'OK'>";
                 echo "</div>";
             }//Ako nije kliknuto na izmeni nego...
             else{
