@@ -43,6 +43,7 @@ include("sesija_clana.php");
                 <?php
                 $msg = "";
                 include 'konekcija.php';
+                
                 if (isset($_POST['cancel'])) {
                     echo "<script>location.href = 'e_posta_clan.php'</script>";
                 }
@@ -52,7 +53,7 @@ include("sesija_clana.php");
                     $naslov = $_POST['naslov'];
                     $tek_pisma = $_POST['tek_pisma'];
                     $mejl_pos = $_POST['mejl_pos'];
-                    
+                   //Upisivanje u tabelu slanje_poruka svih vrednosti 
                     $upit = "INSERT INTO `slanje_poruka` (`prima`, `salje`, `naslov_poruke`, `tekst_prim_poruke`, `tekst_posl_poruke`, `imejl_posiljaoca`)"
                     ." VALUES ('".$ime_prim."', '".$pri_kor."', '".$naslov."', '".$tek_pisma."', '".$tek_pisma."', '".$mejl_pos."')";
                     $result = mysqli_query($kon_sa_serv, $upit);
@@ -84,8 +85,8 @@ include("sesija_clana.php");
                     echo "</div>";   
                 }	
                 ?>
-                <div id="tekst-sadrzaja">
-                <?php echo $msg; ?>
+                <div class="tekst-sadrzaja obavestenjeIzmene">
+                    <?php echo $msg; ?>
                 </div>                
             </div>                                   
         </div>
