@@ -87,22 +87,21 @@ include("sesija_menadzera.php");
                         </tr>
                         <?php
                         include 'konekcija.php';
-
+                        //Iz tabele timovi uzimamo ime tima i ime tim lidera
                         $upit = "SELECT * FROM `timovi`";
                         $result = mysqli_query($kon_sa_serv, $upit);
-
                         while ($red = mysqli_fetch_assoc($result)) {
                             $ime_tima = $red['ime_tima'];
                             $tim_lider = $red['tim_lider'];
-                            
+                            //Ime tima
                             echo"<tr><td><b>".ucfirst($ime_tima)."</b></td>";
-                            if($tim_lider == ""){
+                            if($tim_lider == ""){//Ako nema imena tim lidera piše bez tim lidera
                                 echo"<td><b><font color = 'red'>bez tim lidera</font></b></td>";	
                             }
-                            else{
+                            else{//Ako ga ima piše njegovo ime
                                 echo"<td>".ucfirst($tim_lider)."</td>";
                             }
-                            echo"<td>";
+                            echo"<td>"; //Za timove koji nisu menadzeri ispisujemo obične članove
                             if($ime_tima !='menadzeri'){
                                 $upit1 = "SELECT `korisnicko_ime` FROM `ucesce` WHERE `ime_tima` = '".$ime_tima."' AND `uloga` = 'obicni_clan_tima'";
                                 $result1 = mysqli_query($kon_sa_serv, $upit1);
@@ -110,7 +109,7 @@ include("sesija_menadzera.php");
                                     $kor_im = $red['korisnicko_ime'];
                                     echo ucfirst($kor_im).', ';
                                 }                            
-                            }else{
+                            }else{ //Za menadžere ispisujemo sve menadžere (sva korisnička imena iz tima)
                                 $upit1 = "SELECT `korisnicko_ime` FROM `ucesce` WHERE `ime_tima` = 'menadzeri'";
                                 $result1 = mysqli_query($kon_sa_serv, $upit1);
                                     while ($red = mysqli_fetch_assoc($result1)) {
@@ -145,11 +144,6 @@ include("sesija_menadzera.php");
                 <tr>
                     <td>
                         <a href = "dodav_nov_proj.php"><button>Dodaj novi projekat</button></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href = "vidi_timove.php"><button>Vidi timove</button></a>
                     </td>
                 </tr>
                 <tr>
