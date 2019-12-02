@@ -43,16 +43,16 @@ include("sesija_clana.php");
                 <?php
                 $msg = "";
                 include 'konekcija.php';
-
+                //Ako je kliknuto na dugme Otkaži
                 if (isset($_POST['cancel'])) {
                     echo "<script>location.href = 'primlj_e_pisma_clan.php'</script>";
-                }
+                }//Ako je kliknuto na dugme Pošalji
                 else if (isset($_POST['send'])) {
                     $pri_kor = $_SESSION['korisnicko_ime'];
                     $skr_im = $_POST['skr_im'];
                     $nasl = $_POST['nasl'];
                     $poruka = $_POST['poruka'];
-
+                    //Upis u tabelu slanje_poruka svih vrednosti
                     $upit = "INSERT INTO `slanje_poruka` (`prima`, `salje`, `naslov_poruke`, `tekst_prim_poruke`, `tekst_posl_poruke`) VALUES ('".$skr_im."', '".$pri_kor."', '".$nasl."', '".$poruka."', '".$poruka."')";
                     $result = mysqli_query($kon_sa_serv, $upit);
 
@@ -65,7 +65,7 @@ include("sesija_clana.php");
                     echo "<input name = 'ok' type = 'submit' class='dugmici' value = 'OK'>";
                     echo "</div>";
                 }
-                else{
+                else{//Uzima vrednost iz internet adrese .php?key=
                     $prim_aoc = $_REQUEST['key'];
                     echo "<div class='tekst-sadrzaja'>";
                     echo "<form name = 'reply_form' method = 'post' action = 'odg_na_e_pismo_clan.php'>";    
