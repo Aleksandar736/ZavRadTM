@@ -21,7 +21,7 @@ if (isset($_POST['verifikuj'])) {
                 $nov_kor = $red['korisnicko_ime'];
                 $loz_nov = $red['lozinka'];
             }
-            $upit = "INSERT INTO `ucesce` (`korisnicko_ime`, `uloga`) VALUES ('".$nov_kor."', 'menadzer')";
+            $upit = "INSERT INTO `ucesce` (`korisnicko_ime`, `uloga`) VALUES ('".$nov_kor."', 'obicni_clan_tima')";
             mysqli_query($kon_sa_serv, $upit);
             $msg = "Verifikacija naloga je uspela.";
             break;
