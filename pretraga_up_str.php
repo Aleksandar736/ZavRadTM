@@ -8,7 +8,6 @@ echo "<table border = '2' width = '90%'>";
 echo "<tr>";
 echo "<th>Ime korisnika</th>";
 echo "<th>Ime tima</th>";
-//echo "<th>Ime projekta</th>";
 echo "<th>Uloga u timu</th>";
 echo "<th>Brisanje <br/>/ Izmene</th>";
 echo "</tr>";
@@ -36,7 +35,7 @@ while ($red = mysqli_fetch_assoc($result)) {
     else{
         echo "<td>$poz</td>";
     }
-    echo "<td width = '70px'><a href = 'oduz_ul_timl_men.php?key=".$tra_kor."'><img src = 'images/list_remove_user.png' alt = 'delete' border = '0'></img></a>";
+    echo "<td width = '70px'><a href = 'brisanje_iz_tima.php?key=".$tra_kor."'><img src = 'images/list_remove_user.png' alt = 'delete' border = '0'></img></a>";
     echo "<a href = 'prerasporedje_kor.php?key=".$tra_kor."'><img src = 'images/005-pen_1.png' border = '0' alt = 'edit'></img></a>";
 }
 
