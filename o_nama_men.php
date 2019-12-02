@@ -50,10 +50,11 @@ include("sesija_menadzera.php");
                         <ol>
                             <li>Prijava korisnika;</li>
                             <li>Registracija članova tima;</li>
+                            <li>Pregled i izmena profila korisnika;</li>
                             <li>Promena svoje lozinke;</li>
                             <li>Promena zaboravljene lozinke članova tima;</li>
-                            <li>Unos / izmena / pretraga / brisanje timova;</li>
                             <li>Unos / izmena / pretraga / brisanje projekata;</li>
+                            <li>Unos / izmena / pretraga / brisanje podataka o članovima tima;</li>
                             <li>Unos / izmena / pretraga / brisanje članova tima na projektu;</li>
                             <li>Dodeljivanje uloge tim lidera nekom od članova tima na projektu;</li>
                             <li>Dodeljivanje uloge menadžera;</li>
