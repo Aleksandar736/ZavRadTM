@@ -36,4 +36,3 @@ mysqli_close($kon_sa_serv);
 echo "</table>";
 echo "</div>";
 ?>
-
