@@ -4,7 +4,8 @@ session_destroy();
 $msg = "";
 
 include 'konekcija.php';
-
+//Ako je kliknuto na Registracija, forma je na dnu stranice, vrednosti koje su postovane se dodeljuju
+//ovim varijablama
 if (isset($_POST['register'])) {
     $iadr = $_POST['iadr'];
     $kor_im_pr = $_POST['kor_im_pr'];
@@ -27,7 +28,7 @@ if (isset($_POST['register'])) {
     $po_loz_pri = test_input($po_loz_pri);
     $ime_pri = test_input($ime_pri);
     $pre_pri = test_input($pre_pri);  
-    
+    //Provera da li su sva polja popunjena
     if(($iadr == "") || ($kor_im_pr == "") || ($loz_pri == "") || ($po_loz_pri == "") || ($ime_pri == "") || ($pre_pri == "")){
         $msg = "Popunite sva polja.";
     }
@@ -48,21 +49,25 @@ if (isset($_POST['register'])) {
             }
             else{
                 $ver = rand();
-                $upit = "INSERT INTO `korisnici` (`imejl`, `korisnicko_ime`, `lozinka`, `prezime`, `ime`, `verifikacija`)"
+                $upit = "INSERT INTO `korisnici` (`imejl`, `korisnicko_ime`, `lozinka`, `ime`, `prezime`, `verifikacija`)"
                 ." VALUES ('".$iadr."', '".$kor_im_pr."', '".$loz_pri."', '".$ime_pri."', '".$pre_pri."', '".$ver."')";
                 mysqli_query($kon_sa_serv, $upit);
                 //primalac imejla
-                $to = $iadr;
+                $to = "'".$iadr."'";
                 //naslov imejla
-                $subject = 'kod za verifikaciju';
+                $subject = 'Kod za verifikaciju';
                 //tekst imejla. Svaki red teksta imejla treba da bude odvojen sa \n
-                $message = $ver;
+                $message = "<h1>Verifikacioni kod</h1><p>Vaš verifikacioni kod je "."'".$ver."'</p>";
                 //headers. šalje \r\n odgovori na
-                $headers = "From: aleksandar@gmail.com"."\r\n"."Reply-To: aleksandar@gmail.com";
+                $headers = "From: Tim menadzment<timm@localhost.com>\r\n";
+                $headers .= "Reply-To: noreply@localhost.com\r\n";
+                $headers .= "Content-type: text/html\r\n";
+
                 //slanje imejla
-                $mail_sent = @mail($to, $subject, $message, $headers);
-                //ako je imejl uspešno poslat "imejl je poslat". U suprotnom "imejl nije poslat" 
-                echo "<script>location.href = 'verify.php'</script>";
+               mail($to, $subject, $message, $headers);               
+                
+                //Šalje na stranicu za verifikaciju 
+                echo "<script>location.href = 'verifikacija.php'</script>";
             }
         }
     }
