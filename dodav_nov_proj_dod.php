@@ -3,21 +3,21 @@ include("sesija_menadzera.php");
 
 $msg = "";
 $exist = false;
-
+//Sa stranice dodav_nov_proj.php kupi postovane vrednosti
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     include 'konekcija.php';
-
+    //Ako je kliknuto na Otkaži (name = cancel) onda ide preusmerenje na str. vidi_projekte.php
     if (isset($_POST['cancel'])) {
         echo "<script>location.href = 'vidi_projekte.php'</script>";
     }
-
+    //Sa stranice dodav_nov_proj.php kupi postovane vrednosti
     $ime_proje = $_POST['ime_proje'];
     $opis_proje = $_POST['opis_proje'];
-
+    //Ako nije uneto ime projekta na stranici dodav_nov_proj.php idu obaveštenje i preusmerenje na dodav_nov_proj.php
     if($ime_proje == ''){
         die("<script>alert('Unesite ime projekta!')</script><script>location.href = 'dodav_nov_proj.php'</script>");
     }
-
+    //Provera da li postoji projekat sa tim imenom
     $upit = "SELECT * FROM `projekti`";
     $result = mysqli_query($kon_sa_serv, $upit);
     while ($red = mysqli_fetch_assoc($result)) {
@@ -26,19 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             break;
         }
     }
-
+    //Ako postoji ide poruka o tome
     if ($exist){
         $msg = 'Projekat pod tim imenom već postoji!';
         mysqli_close($kon_sa_serv);
     }
-    else{
-        function test_input($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
+    else{//U suprotno, ako ne postoji ide verifikacija forme i unos u tabelu projekti
+        function test_input($unos) {
+            $unos = trim($unos);
+            $unos = stripslashes($unos);
+            $unos = htmlspecialchars($unos);
+            return $unos;
         }
-        $ime_proje=test_input($ime_proje);
+        $ime_proje = test_input($ime_proje);
+        //Unos u tabelu projekti
         $upit = "INSERT INTO `projekti` (`ime_projekta`, `opis_projekta`) VALUES ('".$ime_proje."', '".$opis_proje."')";
         $result = mysqli_query($kon_sa_serv, $upit);
         if($result){
@@ -97,13 +98,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         
             <div class="tekst-sadrzaja">
 
-                <div class="obavestenjeIzmene">
-                    <?php echo $msg; ?>
+                <div class="obavestenjeIzmene oAplikaciji">
+                    <?php echo $msg; ?><!-- Štampa odgovarajuću poruku -->
                 </div>
 
-                <div class="obavestenjeIzmene">
+                <div class="obavestenjeIzmene"><!-- Taster Ok, koji nakon klika na njega preusmerava -->
                     <form name='ok_form' method='post' action='vidi_projekte.php'>
-                    <input name = 'ok' type = 'submit' value = 'OK'>
+                    <input name = 'ok' type = 'submit' class="dugmici" value = 'OK'>
                 </div>
 
             </div>
