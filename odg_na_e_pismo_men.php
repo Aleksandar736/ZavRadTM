@@ -48,10 +48,10 @@ include("sesija_menadzera.php");
                 <?php
                 $msg = "";
                 include 'konekcija.php';
-
+                //Ako je kliknuto na dugme Otkaži
                 if (isset($_POST['cancel'])) {
                     echo "<script>location.href = 'primlj_e_pisma_men.php'</script>";
-                }
+                }//Ako je kliknuto na dugme Pošalji
                 else if (isset($_POST['send'])) {
                     $pri_kor = $_SESSION['korisnicko_ime'];
                     $skr_im = $_POST['skr_im'];
@@ -70,7 +70,7 @@ include("sesija_menadzera.php");
                     echo "<input name = 'ok' type = 'submit' class='dugmici' value = 'OK'>";
                     echo "</div>";
                 }
-                else{
+                else{//Uzima vrednost iz internet adrese .php?key=
                     $prim_aoc = $_REQUEST['key'];
                     echo "<div class='tekst-sadrzaja'>";
                     echo "<form name = 'reply_form' method = 'post' action = 'odg_na_e_pismo_men.php'>";    
