@@ -28,7 +28,7 @@ include("sesija_menadzera.php");
                 </tr>
                 <tr>
                     <td>
-                        <a href ="projekti_po_timovima.php"><button>Projekti</button></a>
+                        <a href ="projekti_po_timovima.php"><button>Projekti po timovima</button></a>
                     </td>
                 </tr>
                 <tr>
@@ -55,6 +55,7 @@ include("sesija_menadzera.php");
                     <?php
                     include 'konekcija.php';
                     $mess = "";
+                    //Broji koliko je ne pregledanih poruka
                     $brojac = 0;
                     $upit = "SELECT * FROM `slanje_poruka` WHERE `prima` = '".$pri_kor."' AND `pregledana` = 0";
                     $result = mysqli_query($kon_sa_serv, $upit);
@@ -78,14 +79,14 @@ include("sesija_menadzera.php");
             <table>
                 <tr>
                     <td>            
-                        <a href = "prom_loz_men.php"><button>Promeni lozinku</button></a>
+                        <a href = "prom_loz_men.php"><button>Promeni svoju lozinku</button></a>
                     </td>
-                </tr>            
+                </tr>
                 <tr>
                     <td>
-                        <a href = "vidi_korisnike_men.php"><button>Lista korisnika</button></a>
+                        <a href = "izm_profila_kor.php"><button>Izmeni profil korisnika</button></a>
                     </td>
-                </tr> 
+                </tr>                  
             </table>
         </div>
     </div>
