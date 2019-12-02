@@ -44,11 +44,12 @@ include("sesija_clana.php");
                 <?php
                 $id_por = $_REQUEST['key'];
                 include 'konekcija.php';
-
+                //Namesta u bazi na 1 (umesto 0) u koloni pregl. (pa se broj neproč. smanjuje za jedan (brojač ga ne broji))
+                //u fajlovima menadzer, tim_lider i obicni_clan
                 $upit = "UPDATE `slanje_poruka` SET `pregledana` = 1 WHERE `idporuke` = '".$id_por."'";
                 mysqli_query($kon_sa_serv, $upit);
 
-
+                //Čita iz baze poruku sa id-jem $id_por
                 $upit = "SELECT * FROM `slanje_poruka` WHERE `idporuke` = '".$id_por."'";
                 $result = mysqli_query($kon_sa_serv, $upit);
                 while ($red = mysqli_fetch_assoc($result)){
