@@ -55,10 +55,10 @@ include("sesija_menadzera.php");
                     }
 
                 $msg = "";
-
+                //Ako je kliknuto na dugme Otkaži čije ime (name) inputa je cancel
                 if (isset($_POST['cancel'])) {
                     echo "<script>location.href = 'vidi_projekte.php'</script>";
-                }
+                }//U suprotnom ako je kliknuto na na dugme izmeni čije ime (name) inputa je change
                 else if (isset($_POST['change'])) {
                     include 'konekcija.php';
 
@@ -79,15 +79,15 @@ include("sesija_menadzera.php");
                         mysqli_close($kon_sa_serv);
                         $msg = "Izmene nisu sačuvane.";
                     }
-                    echo "<div class='tekst-sadrzaja'>";
+                    echo "<div class='obavestenjeIzmene oAplikaciji'>";
                     echo "<form name='ok_form' method='post' action='vidi_projekte.php'>";
-                    echo "<input name = 'ok' type = 'submit' value = 'OK'>";
+                    echo "<input name = 'ok' type = 'submit' class='dugmici' value = 'OK'>";
                     echo "</div>";
-                }
-                else{
+                }//U trenutku učitavanja stranica
+                else{//$_REQUEST['key'] svoju vrednost uzima iz adrese na primer prom_opisa_proje.php?key=Administracija
                     $kljuc_pro = $_REQUEST['key'];
                     include 'konekcija.php';
-
+                //Uzima vrednosti ime projekta i opis projekta iz tabele projekti 
                     $upit = "SELECT * FROM `projekti` WHERE `ime_projekta` = '".$kljuc_pro."'";
                     $result = mysqli_query($kon_sa_serv, $upit);
                     while ($red = mysqli_fetch_assoc($result)) {
@@ -95,7 +95,7 @@ include("sesija_menadzera.php");
                         $izm_opis = $red['opis_projekta'];
                     }
                     mysqli_close($kon_sa_serv);
-
+                    //Tabela
                     echo "<div class='tabelaProPo'>";
                     echo "<h3 class='dodavanjeNaslov'>Izmeni opis projekta: </h3>";
                     echo "</div>";
